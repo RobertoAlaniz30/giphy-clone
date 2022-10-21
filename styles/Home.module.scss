@@ -108,6 +108,26 @@
   margin-left: 0.5rem;
 }
 
+.grid_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+
+  div {
+    img {
+      height: 200px;
+      width: 200px;
+      border-radius: 8px;
+      
+    }
+  }
+
+
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
@@ -116,13 +136,16 @@
 }
 
 @media (prefers-color-scheme: dark) {
+
   .card,
   .footer {
     border-color: #222;
   }
+
   .code {
     background: #111;
   }
+
   .logo img {
     filter: invert(1);
   }
