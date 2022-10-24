@@ -1,0 +1,16 @@
+.grid_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    div {
+      img {
+        height: 200px;
+        width: 200px;
+        border-radius: 8px;
+  
+      }
+    }
+  }

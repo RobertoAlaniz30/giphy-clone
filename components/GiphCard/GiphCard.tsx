@@ -10,7 +10,7 @@ const GiphCard: React.FC<GiphCardProps> = ({ src }): JSX.Element => {
     return (
         <div>
             <img src={src} />
-            <IconButton color="primary" sx={{backgroundColor: "red"}}>
+            <IconButton color="secondary" >
                 <FavoriteBorderIcon />
             </IconButton>
         </div>
