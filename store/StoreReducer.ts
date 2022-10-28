@@ -28,7 +28,7 @@ type ACTIONS =
       payload: boolean
     };
 
-export function storeReducer(state: INITIAL_STATE_INTERFACE, action: ACTIONS) {
+export function storeReducer(state: any, action: ACTIONS) {
   const { type, payload } = action;
   switch (type) {
     case "LOAD_GIPHS":

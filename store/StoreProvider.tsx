@@ -13,7 +13,7 @@ export const StoreContext = createContext<storeContextInterface>({
   dispatch: () => null
 });
 const StoreProvider: React.FC<{children: React.ReactNode}> = ({ children }): JSX.Element => {
-  const [store, dispatch] = useReducer(storeReducer, INITIAL_STATE)
+  const [store, dispatch] = useReducer(storeReducer, INITIAL_STATE,)
   return <StoreContext.Provider value={{ store, dispatch }}>{children}</StoreContext.Provider>;
 };
 export default StoreProvider

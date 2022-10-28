@@ -1,6 +1,6 @@
 export interface INITIAL_STATE_INTERFACE{
-    giphs: Array<parsedGiphObject>
-    favoritesGiphs: Array<string>
+    giphs: []
+    favoritesGiphs: []
     textSearchedGiph: string
     searchedGiphs: [],
     isLoading: Boolean
