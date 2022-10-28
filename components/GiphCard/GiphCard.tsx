@@ -4,7 +4,6 @@ import {
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import styles from "./GiphCard.module.scss"
 import { parsedGiphObject } from "../../interfaces/interfaces"
-import Image from 'next/image'
 
 interface GiphCardProps {
     src: string,
@@ -15,7 +14,7 @@ const GiphCard: React.FC<GiphCardProps> = ({ src, onClick, item }): JSX.Element 
 
     return (
         <div className={styles.giphCard_container} >
-            <Image src={src} />
+            <img src={src}  />
             <Button variant="contained"
                 onClick={onClick}
                 color={`${item?.selected ? "error" : "inherit"}`}
