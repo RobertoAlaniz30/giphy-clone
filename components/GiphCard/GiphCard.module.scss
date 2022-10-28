@@ -1,0 +1,16 @@
+.giphCard_container {
+    position: relative;
+    box-shadow: -1px 21px 17px -9px rgba(0, 0, 0, 0.19);
+    background-color: transparent;
+
+    .favorite_button {
+        position: absolute;
+        right: 8px;
+        top: 15px;
+        border-radius: 50%;
+        height: 35px;
+        width: 0;
+        padding-left: 25px;
+        min-width: 0
+    }
+}

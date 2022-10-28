@@ -1,6 +1,9 @@
-import {STATE}  from "../interfaces/interfaces"
+import {INITIAL_STATE_INTERFACE}  from "../interfaces/interfaces"
 
-export const INITIAL_STATE: STATE= {
+export const INITIAL_STATE: INITIAL_STATE_INTERFACE= {
+    giphs: [],
     favoritesGiphs: [],
-    searchedGiph: ""
+    textSearchedGiph: "",
+    searchedGiphs: [],
+    isLoading: false
 }

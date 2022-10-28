@@ -1,46 +1,47 @@
 import GiphCard from "../GiphCard/GiphCard"
-import { Fragment } from "react";
+import { Fragment} from "react";
 import styles from "./ListGiphs.module.scss"
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useState } from "react";
-import axios from "axios";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useContext } from "react";
+import { StoreContext } from "../../store/StoreProvider";
+import { parsedGiphObject } from "../../interfaces/interfaces";
+import { useInfiniteFetchGiphs } from "../../hooks/useInfiniteFetchGiphs";
+import { useSnackbar } from 'notistack';
 
-const ListGiphs = ({
-    data
-}: any) => {
-    const [giphs, setGiphs] = useState(data)
-    const getMoreGiphs = () => {
-        axios({
-            method: "GET",
-            url: "https://api.giphy.com/v1/gifs/trending",
-            params: {
-                api_key: "HC5YScnd2Kws9G5xAgZFUAC0XGj16Xse",
-                offset: 50
-            },
-        });
-        setGiphs([...giphs, ...data])
-    };
+const ListGiphs = () => {
+    const { enqueueSnackbar} = useSnackbar();
+    const {getMoreGiphs} = useInfiniteFetchGiphs();
+    const {toogleItemOfLocalStorage} = useLocalStorage("FAVORITES_GIPHS", [])
+    const { store} = useContext(StoreContext)
+
+    const handleOnClick = (item: parsedGiphObject) => { 
+        toogleItemOfLocalStorage(item)
+        enqueueSnackbar('Toogle Item');
+    }
+    if(store.isLoading){
+        return <p>Loading</p>
+    }
     return (
-        <Fragment>
-            <button onClick={() => console.log(giphs)}>ujedfs</button>
+        <div className={styles.listGiph_container}>
             <InfiniteScroll
-                dataLength={giphs.length}
+                dataLength={store.searchedGiphs?.length}
                 next={getMoreGiphs}
                 hasMore={true}
                 loader={<h3> Loading...</h3>}
                 endMessage={<h4>Nothing more to show</h4>}
             >
                 <div className={styles.grid_container}>
-                    {giphs && giphs.map((item: any, index: any) => {
+                    {store.searchedGiphs && store.searchedGiphs.map((item: parsedGiphObject, index: number) => {
                         return (
                             <Fragment key={index} >
-                                <GiphCard src={item.images.original.url} />
+                                <GiphCard src={item.url} onClick={() => handleOnClick(item)} item={item} />
                             </Fragment>
                         )
                     })}
                 </div>
             </InfiniteScroll >
-        </Fragment >
+        </div>
     )
 }
 

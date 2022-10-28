@@ -1,3 +1,44 @@
-.textField fieldset {
-    border-radius: 16px;
+$searchBarBreakpoints: (
+  sm: 320px,
+  md: 555px,
+  lg: 1024px,
+  xl: 1280px
+);
+
+@mixin media-up($searchBarBreakpoint) {
+  @media screen and (min-width: map-get($searchBarBreakpoints, $searchBarBreakpoint)) {
+    @content;
   }
+}
+
+.searchBar_container {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0px;
+
+  @include media-up(md) {
+    width: auto;
+    flex-direction: row;
+  }
+  @include media-up(lg) {
+    width: 700px
+  }
+}
+
+.search_button {
+  width: 100px;
+  height: 40px;
+
+  @include media-up(sm) {
+    margin-left: 10px;
+    padding: 0px 20px;
+    border-radius: 16px;
+    background-color: black;
+  }
+}
+
+.searchBar_container fieldset {
+  border-radius: 16px;
+}

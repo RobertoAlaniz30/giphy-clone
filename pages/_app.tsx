@@ -6,15 +6,18 @@ import createEmotionCache from "../utils/createEmotionCache";
 import { CacheProvider } from "@emotion/react";
 import StoreProvider from '../store/StoreProvider'
 const clientSideEmotionCache = createEmotionCache();
+import { SnackbarProvider } from "notistack";
 
 function MyApp({ Component,
   emotionCache = clientSideEmotionCache, pageProps }: any) {
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={lightTheme}>
-        <StoreProvider>
-          <Component {...pageProps} />
-        </StoreProvider>
+        <SnackbarProvider>
+          <StoreProvider>
+            <Component {...pageProps} />
+          </StoreProvider>
+        </SnackbarProvider>
       </ThemeProvider>
     </CacheProvider>
   );

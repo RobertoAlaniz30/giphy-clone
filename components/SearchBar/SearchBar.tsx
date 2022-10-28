@@ -12,11 +12,12 @@ import {
 
 import { Close, Search } from "@mui/icons-material";
 
+
 interface SearchBarProps {
   value?: string;
-  onSearch?: () => void;
-  onChange: (e: any) => void;
-  onResetSearch?: () => void
+  onSearch: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onResetSearch: () => void
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -25,38 +26,36 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   onResetSearch,
 }): JSX.Element => {
-  const inputRef = useRef();
+  const inputRef = useRef<any>();
 
-    function handleOnChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-      onChange(e);
-    }
-
-  //   function handleOnReset() 
-  //     inputRef.current.focus();
-  //     onResetSearch();
-  //   }
+  function handleOnReset() {
+    inputRef.current.focus();
+    onResetSearch();
+  }
+  function handleOnChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    onChange(e)
+  }
   return (
     <Fragment>
-      <Box display="flex" className={styles.textField}>
+      <Box display="flex" className={styles.searchBar_container}>
         <TextField
-          sx={{ backgroundColor: "white", width: "800px", }}
           inputRef={inputRef}
           size="small"
           fullWidth
           placeholder="Buscar"
           variant="outlined"
           value={value}
-          //   onKeyUp={(e) => {
-          //     if (e.code === "Enter") onSearch();
-          //   }}
+          onKeyUp={(e: React.KeyboardEvent<HTMLDivElement>) => {
+            if (e.code === "Enter") onSearch();
+          }}
           onChange={handleOnChange}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <Tooltip title={<Typography>Borrar Búsqueda</Typography>}>
                   <IconButton
-                    // onClick={handleOnReset}
-                    // onMouseDown={handleOnReset}
+                    onClick={handleOnReset}
+                    onMouseDown={handleOnReset}
                     size="small"
                   >
                     <Close />
@@ -69,7 +68,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
         <Button
           size="small"
-          style={{ marginLeft: "10px", padding: "0px 20px", borderRadius: "16px", backgroundColor: "black" }}
+          className={styles.search_button}
           onClick={onSearch}
           disableElevation
           variant="contained"
