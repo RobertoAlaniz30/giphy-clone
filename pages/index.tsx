@@ -74,7 +74,7 @@ const Home: NextPage = ({ data }: any): JSX.Element => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const axiosResponse = await getTrendingGifts()
   const data = axiosResponse.data.data
   const parsedGiphs = parseDataGiphs(data)
